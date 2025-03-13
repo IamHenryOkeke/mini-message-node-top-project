@@ -1,0 +1,16 @@
+<!-- index.ejs -->
+<html>
+  <head>
+    <title><%= title %></title>
+    <!-- Ref should be ./ to access the public folder in the root folder -->
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <%- include('navbar') %>
+    <ul>
+      <% messages.forEach((message) => { %>
+        <%- include('message', {message: message}); %>
+      <% }); %>
+    </ul>    
+  </body>
+</html>
