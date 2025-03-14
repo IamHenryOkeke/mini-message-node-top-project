@@ -28,7 +28,7 @@ const getMessageById = asyncHandler(async (req, res) => {
 const addMessage = asyncHandler(async (req, res) => {
   const {messageText, messageAuthor} = req.body
 
-  db.messages.push({ text: messageText, user: messageAuthor, added: new Date(), id: messages.length + 1 });
+  db.messages.push({ text: messageText, user: messageAuthor, added: new Date(), id: db.messages.length + 1 });
   
   res.redirect("/")
 });
