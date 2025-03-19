@@ -27,7 +27,7 @@ async function main() {
   }
   
   const client = new Client({
-    connectionString: "postgresql://henryokeke27:0dFeJCrp9kaE@ep-lucky-meadow-a5ifg5q8-pooler.us-east-2.aws.neon.tech/mini-message-board?sslmode=require",
+    connectionString: process.env.DBURL
   });
   await client.connect();
   await client.query(SQL);
