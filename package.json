@@ -6,8 +6,6 @@
   "scripts": {
     "start": "node --watch app.js",
     "dev": "nodemon app.js",
-    "build": "echo 'No build step required for Express' && exit 0",
-    "prod": "NODE_ENV=production node app.js",
     "seed": "node db/populatedb.js"
   },
   "keywords": [],
