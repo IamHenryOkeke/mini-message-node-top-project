@@ -5,7 +5,6 @@ const asyncHandler = require("express-async-handler");
 
 const getMessages = asyncHandler(async (req, res) => {
   const messages = await getAllMessages();
-
   if (!messages) {
     throw new CustomNotFoundError("No messages not found");
   }
