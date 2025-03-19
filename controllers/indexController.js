@@ -1,13 +1,13 @@
 // controllers/authorController.js
 
-const db = require("../db");
+const {getAllMessages, getMessageByID, insertMessage} = require("../db/queries");
 const asyncHandler = require("express-async-handler");
 
 const getMessages = asyncHandler(async (req, res) => {
-  const messages = db.messages;
+  const messages = await getAllMessages();
 
   if (!messages) {
-    throw new CustomNotFoundError("No Authors not found");
+    throw new CustomNotFoundError("No messages not found");
   }
 
   res.render("index", { title: "Mini message board", messages })
@@ -16,7 +16,9 @@ const getMessages = asyncHandler(async (req, res) => {
 const getMessageById = asyncHandler(async (req, res) => {
   const {messageId} = req.params;
 
-  const message = db.messages.find((message) => message.id === Number(messageId))
+  const message = await getMessageByID(messageId);
+
+  console.log(message)
 
   if (!message) { 
     return res.status(404).send("Message not found");
@@ -28,7 +30,12 @@ const getMessageById = asyncHandler(async (req, res) => {
 const addMessage = asyncHandler(async (req, res) => {
   const {messageText, messageAuthor} = req.body
 
-  db.messages.push({ text: messageText, user: messageAuthor, added: new Date(), id: db.messages.length + 1 });
+  const message = {
+    text: messageText,
+    user: messageAuthor
+  }
+
+  await insertMessage(message);
   
   res.redirect("/")
 });
